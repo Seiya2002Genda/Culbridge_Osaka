@@ -1,0 +1,232 @@
+/* ======================
+    共通テーマ変数
+====================== */
+:root {
+    --radius: 14px;
+    --shadow: 0 6px 18px rgba(0,0,0,0.3);
+}
+
+/* ======================
+    BODY背景 + 読みやすさレイヤー
+====================== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    color: #fff;
+    min-height: 100vh;
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: -1;
+}
+
+/* ======================
+    HERO
+====================== */
+.hero {
+    text-align: center;
+    padding: 45px 0;
+    font-weight: bold;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+}
+.hero h1 {
+    font-size: 2.4rem;
+    margin: 0;
+}
+.hero p {
+    opacity: 0.9;
+}
+
+/* ======================
+    INDEX グリッド
+====================== */
+.layout-grid {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 32px;
+}
+.box {
+    background: #222;
+    border: 3px solid;
+    border-radius: var(--radius);
+    text-decoration: none;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: bold;
+    transition: 0.25s;
+}
+.box i { font-size: 2.0rem; }
+
+.box:hover {
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+/* 種類別枠色 */
+.box.japan { border-color: #e63946; }
+.box.global { border-color: #00aaff; }
+.box.info { border-color: #ffd447; }
+
+/* 投稿数バッジ */
+.badge {
+    display: inline-block;
+    padding: 2px 6px;
+    background: #ff3a3a;
+    font-size: 0.75rem;
+    border-radius: 10px;
+    position: absolute;
+    top: 10px; right: 12px;
+}
+
+/* ======================
+    CONTAINER（共通）
+====================== */
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto 80px;
+}
+
+/* ======================
+    投稿フォーム
+====================== */
+.post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(0,0,0,0.45);
+    padding: 16px;
+    border-radius: var(--radius);
+    margin-bottom: 26px;
+}
+.post-form label {
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+.post-form input, .post-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--radius);
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #000;
+}
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+.btn-post {
+    background: #00aaff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+}
+.btn-post:hover { filter: brightness(1.2); }
+
+/* ======================
+    投稿カード
+====================== */
+.card {
+    background: rgba(255,255,255,0.85);
+    color: #000;
+    padding: 18px;
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    transition: 0.25s;
+}
+.card:hover { transform: translateY(-4px); }
+
+.card h2 {
+    margin-bottom: 4px;
+    font-size: 1.25rem;
+    font-weight: 900;
+}
+.post-image {
+    width: 100%;
+    border-radius: var(--radius);
+    margin: 10px 0;
+}
+
+/* ======================
+    アクションボタン
+====================== */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+.actions button {
+    background: #222;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: var(--radius);
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: .2s;
+}
+.actions button:hover {
+    background: #555;
+}
+
+/* ======================
+    戻るボタン
+====================== */
+.btn-back {
+    display: inline-block;
+    text-decoration: none;
+    background: #444;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    margin-top: 16px;
+}
+.btn-back:hover {
+    background: #222;
+}
+
+/* ======================
+    RESPONSIVE
+====================== */
+@media (max-width: 768px) {
+    .layout-grid {
+        grid-template-columns: 1fr;
+    }
+    .box {
+        width: 100%;
+    }
+}
+/* INDEX 専用背景 */
+.index-bg {
+  background-image: url('img/index_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  backdrop-filter: blur(3px);
+}
+
+/* 背景をほんのり暗くしてコンテンツを見やすく */
+.index-bg::before {
+  content:'';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  z-index: -1;
+}

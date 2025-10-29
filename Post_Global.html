@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="ja"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外の経験を投稿</title>
+<link rel="stylesheet" href="Style.css">
+</head><body class="global-theme">
+<header class="hero"><h1>海外の経験 投稿</h1><p>Share your global experience</p></header>
+
+<main class="container">
+  <form class="post-form">
+    <label>タイトル</label><input id="title" type="text" placeholder="例: NYの夜景">
+    <label>日付</label><input id="date" type="date">
+    <label>体験内容</label><textarea id="content" placeholder="印象に残った体験を書こう"></textarea>
+    <label>画像（任意）</label><input id="image" type="file" accept="image/*">
+    <div id="imagePreview" class="image-preview">プレビュー</div>
+    <button type="button" class="btn-post" onclick="savePost('global')">投稿する</button>
+  </form>
+  <a class="btn-back" href="index.html">戻る</a>
+</main>
+
+<script src="background.js"></script>
+<script src="post.js"></script>
+<script>
+document.getElementById('image').addEventListener('change', e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader(); r.onload=ev=>imagePreview.innerHTML=`<img class="preview-img" src="${ev.target.result}">`; r.readAsDataURL(f);
+});
+initEditIfNeeded();
+</script>
+</body></html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海外の経験を見る</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+
+<body class="global-theme">
+
+<header class="hero">
+    <h1>海外の経験</h1>
+    <p>See real experiences from the world</p>
+</header>
+
+<main class="container">
+    <div id="feed" class="feed"></div>
+
+    <a href="index.html" class="btn-back">戻る</a>
+</main>
+
+<script src="background.js"></script>
+
+<script>
+    const STORAGE_KEY = "experiences";
+    let editId = localStorage.getItem("edit-post-id");
+
+    function renderFeed() {
+        const feed = document.getElementById("feed");
+        const posts = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+        const filtered = posts
+            .filter(p => p.type === "global")
+            .sort((a, b) => b.createdAt - a.createdAt);
+
+        feed.innerHTML = "";
+
+        filtered.forEach(post => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+                <h2>${post.title}</h2>
+                <p>${post.date}</p>
+                ${post.imageDataUrl ? `<img class="post-image" src="${post.imageDataUrl}" />` : ""}
+                <p>${post.content}</p>
+
+                <div class="actions">
+                    <button onclick="likePost(${post.id})">❤️ ${post.likes}</button>
+                    <button onclick="editPost(${post.id})">✏️ 編集</button>
+                    <button onclick="deletePost(${post.id})">🗑️ 削除</button>
+                </div>
+            `;
+            feed.appendChild(card);
+        });
+    }
+
+    function likePost(id) {
+        const posts = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        const post = posts.find(p => p.id === id);
+        post.likes++;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+        renderFeed();
+    }
+
+    function editPost(id) {
+        localStorage.setItem("edit-post-id", id);
+        window.location.href = "Post_Overseas.html";
+    }
+
+    function deletePost(id) {
+        if (!confirm("本当に削除しますか？")) return;
+        const posts = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        const newPosts = posts.filter(p => p.id !== id);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newPosts));
+        renderFeed();
+    }
+
+    document.addEventListener("DOMContentLoaded", renderFeed);
+</script>
+
+</body>
+
+</html>

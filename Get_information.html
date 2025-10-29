@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外の近況状況</title>
+<link rel="stylesheet" href="Style.css">
+</head>
+
+<body class="global-theme">
+
+<header class="hero">
+<h1>海外の近況状況</h1>
+<p>Real Global Experiences</p>
+</header>
+
+<main class="container">
+<div id="feed" class="feed"></div>
+<a href="index.html" class="btn-back">戻る</a>
+</main>
+
+<script src="background.js" defer></script>
+<script src="viewer.js" defer></script>
+<script>
+const type = "info";
+document.addEventListener("DOMContentLoaded", () => showList(type));
+</script>
+
+</body>
+</html>
